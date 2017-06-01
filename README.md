@@ -191,7 +191,7 @@ Java中那些不可达的对象就会变成垃圾。那么什么叫做不可达�
 - accessToken 和 refreshToken 都有过期时间, accessToken 的过期时间相对比较短，accessToken过期了 可用app_key + refreshToken 重新获取,
 refreshToken 过期了 需要重新 授权
 
-###客户端模式 (服务端对客户端)
+### 客户端模式 (服务端对客户端)
 
 - app端 通过公钥 + sign(秘钥,uri,ticket,timestamp) 获取 accessToken
 - 资源服务器返回 accessToken,refreshToken,expires_in
