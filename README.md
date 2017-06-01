@@ -145,7 +145,7 @@ Java中那些不可达的对象就会变成垃圾。那么什么叫做不可达�
 ### Minor GC 从年轻代空间（包括 Eden 和 Survivor 区域）回收内存被称为 Minor GC
 
 ### Full GC 是清理整个堆空间—包括新生代、老生代、元空间
-#### 触发条件
+#### FULL GC 触发条件
     1. 老年代空间不足
     2. 元空间不足
 
@@ -197,3 +197,6 @@ refreshToken 过期了 需要重新 授权
 - 资源服务器返回 accessToken,refreshToken,expires_in
 - accessToken 和 refreshToken 都有过期时间, accessToken 的过期时间相对比较短，accessToken过期了 可用app_key + refreshToken + sign 重新获取,
   refreshToken 过期了 需要重新 授权
+  
+  
+  ### 未完待续
