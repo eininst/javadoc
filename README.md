@@ -197,6 +197,21 @@ refreshToken 过期了 需要重新 授权
 - 资源服务器返回 accessToken,refreshToken,expires_in
 - accessToken 和 refreshToken 都有过期时间, accessToken 的过期时间相对比较短，accessToken过期了 可用app_key + refreshToken + sign 重新获取,
   refreshToken 过期了 需要重新 授权
-  
-  
-### 未完待续
+
+
+### Collection
+不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 Iterator
+方式,如果并发操作,需要对 Iterator 对象加锁。
+```java
+final void checkForComodification() {
+    if (modCount != expectedModCount)
+    throw new ConcurrentModificationException();
+}
+```
+
+ArrayList.add()方法，每执行一次都会modCount++(当然删除就是modCount--)，但不改变expectedModCount的值。expectedModCount的值是在构建迭代的时候初始为expectedModCount=modCount的。
+
+这就是楼主说的在构建迭代器之后，再使用ArrayList.add()方法就造成了modCount != expectedModCount
+
+所以构建迭代器后，用迭代器来add和remove就没有问题。因为它会在改变modCount的值之后，又把值赋给了expectedModCount，从而保证modCount=expectedModCount
+expectedModCount是迭代器里的变量, 获得迭代器的时候就会赋值, 而modCount是List中的变量, 会随着集合修改而变的
