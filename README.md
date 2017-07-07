@@ -215,3 +215,7 @@ ArrayList.add()方法，每执行一次都会modCount++(当然删除就是modCou
 
 所以构建迭代器后，用迭代器来add和remove就没有问题。因为它会在改变modCount的值之后，又把值赋给了expectedModCount，从而保证modCount=expectedModCount
 expectedModCount是迭代器里的变量, 获得迭代器的时候就会赋值, 而modCount是List中的变量, 会随着集合修改而变的
+
+
+## Timer
+多线程并行处理定时任务时,Timer 运行多个 TimeTask 时,只要其中之一没有捕获 抛出的异常,其它任务便会自动终止运行,使用 ScheduledExecutorService 则没有这个问题
