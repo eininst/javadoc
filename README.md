@@ -219,3 +219,7 @@ expectedModCount是迭代器里的变量, 获得迭代器的时候就会赋值, 
 
 ## Timer
 多线程并行处理定时任务时,Timer 运行多个 TimeTask 时,只要其中之一没有捕获 抛出的异常,其它任务便会自动终止运行,使用 ScheduledExecutorService 则没有这个问题
+
+## Random (实例包括 java.util.Random 的实例或者 Math.random()的方式)
+避免 Random 实例被多线程使用,虽然共享该实例是线程安全的,但会因竞争同一 seed 导致的性能下降。
+在 JDK7 之后,可以直接使用 API ThreadLocalRandom,而在 JDK7 之前,需要编码保 证每个线程持有一个实例。
