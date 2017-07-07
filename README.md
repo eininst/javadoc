@@ -223,3 +223,18 @@ expectedModCount是迭代器里的变量, 获得迭代器的时候就会赋值, 
 ## Random (实例包括 java.util.Random 的实例或者 Math.random()的方式)
 避免 Random 实例被多线程使用,虽然共享该实例是线程安全的,但会因竞争同一 seed 导致的性能下降。
 在 JDK7 之后,可以直接使用 API ThreadLocalRandom,而在 JDK7 之前,需要编码保 证每个线程持有一个实例。
+
+## NPE
+
+1. 返回类型为基本数据类型,return 包装数据类型的对象时,自动拆箱有可能产生 NPE。
+```java
+反例:public int f() { return Integer 对象}, 如果为 null,自动解箱抛 NPE。
+```
+2. 数据库的查询结果可能为null。
+3. 集合里的元素即使isNotEmpty,取出的数据元素也可能为null。
+4. 远程调用返回对象时,一律要求进行空指针判断,防止NPE。
+5. 对于Session中获取的数据,建议NPE检查,避免空指针。
+6. 级联调用obj.getA().getB().getC();一连串调用,易产生NPE。
+
+正例:使用 JDK8 的 Optional 类来防止 NPE 问题。
+
