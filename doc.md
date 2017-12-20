@@ -138,3 +138,10 @@
 | `pickup_minutes` | `number` | 餐厅预估时间 -1(代表没有预估时间) | 
 | `items` | `array` | 订单商品信息 | 
 
+
+**简要描述：** 获取当前可分配的快递员
+   
+**请求 URL：** `/api/v1/order/query`
+   
+**请求方式：** GET
+
