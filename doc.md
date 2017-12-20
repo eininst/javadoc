@@ -12,7 +12,7 @@
 | 参数名 | 必选 | 类型 | 默认值 | 单位 | 说明 |
 |:----:|:---:|:-----:|:-----:|:-----:|:-----:|
 | `courier_seconds` | 是 | `number` | 900 | 秒 |过滤配送员位置更新时间在最近courier_seconds内的配送员 |
-| `order_seconds` | 是 | `number` | 3600 | 秒 | 过滤配送员最近order_seconds内完成的订单 |
+| `order_seconds` | 是 | `array` | 3600 | 秒 | 过滤配送员最近order_seconds内完成的订单 |
 
 **返回示例**
 - 调用成功示例
@@ -24,7 +24,7 @@
 		id: 233,
 		latitude: -37.80728962839981,
 		longitude: 144.9662161999722,
-		orders: [],
+		orders: [1594249,1594265],
 		score: 8.3974
 	}, {
 		driving_type: 2,
