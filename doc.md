@@ -11,4 +11,5 @@
 
 | 参数名 | 必选 | 类型 | 默认值 | 说明 |
 |:----:|:---:|:-----:|:-----:|:-----:|
-| `courier_seconds` | 是 | `number` | 900 | 配送员位置更新时间在最近courier_seconds内的配送员 |
+| `courier_seconds` | 是 | `number` | 900 | 过滤配送员位置更新时间在最近courier_seconds内的配送员 |
+| `order_seconds` | 是 | `number` | 3600 | 过滤配送员最近1小时内完成的订单 |
