@@ -137,7 +137,7 @@
 | `status` | `number` | 订单状态 1(准备中)  | 
 | `user_id` | `number` | 客户ID | 
 | `shop_id` | `number` | 餐馆ID | 
-| `shop_location` | `number` | 餐馆经纬度| 
+| `shop_location` | `string` | 餐馆经纬度| 
 | `pickup_minutes` | `number` | 餐厅预估时间 -1(代表没有预估时间) | 
 | `items` | `array` | 订单商品信息 | 
 
