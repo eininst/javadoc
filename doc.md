@@ -52,5 +52,5 @@
 | `longitude` | `number` | 配送员经度 | 
 | `latitude` | `number` | 配送员纬度 | 
 | `driving_type` | `number` | -1(未设定),0(电动自行车),1(摩托车),2(汽车),3(脚踏自行车),4(面包车),5(货车) | 
-| `score` | `number` | 配送员评分 | 
+| `score` | `number` | 配送员评分(满分10) | 
 | `orders` | `number` | 配送员最近order_seconds内完成的订单 | 
