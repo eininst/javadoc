@@ -84,7 +84,7 @@
 			price: 12.5
 		}],
 		location: "-37.805744,144.962790",
-		pickup_minutes: 0,
+		pickup_minutes: -1,
 		shop_id: 898,
 		shop_location: "-37.80671299999999,144.96536100000003",
 		status: 1,
@@ -112,7 +112,7 @@
 			price: 2
 		}],
 		location: "-37.806893,145.012289",
-		pickup_minutes: 0,
+		pickup_minutes: -1,
 		shop_id: 2544,
 		shop_location: "-37.8201379,145.12363119999998",
 		status: 1,
@@ -126,10 +126,15 @@
 
 | 返回参数名 | 类型 | 说明 |
 |:-----:|:-----:|:-----:|
-| `id` | `number` | 配送员ID | 
-| `longitude` | `number` | 配送员经度 | 
-| `latitude` | `number` | 配送员纬度 | 
-| `driving_type` | `number` | -1(未设定),0(电动自行车),1(摩托车),2(汽车),3(脚踏自行车),4(面包车),5(货车) | 
-| `score` | `number` | 配送员评分(满分10) | 
-| `orders` | `number` | 配送员最近order_seconds内完成的订单 | 
+| `id` | `number` | 订单ID | 
+| `city_id` | `number` | 固定为1 代表墨尔本 | 
+| `location` | `string` | 订单经纬度 | 
+| `create_time` | `string` | 订单创建时间 | 
+| `delivery_time` | `string` | 客户选择的收货时间 | 
+| `status` | `number` | 订单状态 1(准备中)  | 
+| `user_id` | `number` | 客户ID | 
+| `shop_id` | `number` | 餐馆ID | 
+| `shop_location` | `number` | 餐馆经纬度| 
+| `pickup_minutes` | `number` | 餐厅预估时间 -1(代表没有预估时间) | 
+| `items` | `array` | 订单商品信息 | 
 
