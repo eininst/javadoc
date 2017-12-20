@@ -61,7 +61,7 @@
 
 **简要描述：** 获取当前可分配的快递员
    
-**请求 URL：** `/api/v1/couriers`
+**请求 URL：** `/api/v1/orders`
    
 **请求方式：** GET
    
