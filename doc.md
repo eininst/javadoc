@@ -11,8 +11,8 @@
 
 | 参数名 | 必选 | 类型 | 默认值 | 单位 | 说明 |
 |:----:|:---:|:-----:|:-----:|:-----:|:-----:|
-| `courier_seconds` | 是 | `number` | 900 | 秒 |过滤配送员位置更新时间在最近courier_seconds内的配送员 |
-| `order_seconds` | 是 | `number` | 3600 | 秒 | 过滤配送员最近order_seconds内完成的订单 |
+| `courier_seconds` | 否 | `number` | 900 | 秒 |过滤配送员位置更新时间在最近courier_seconds内的配送员 |
+| `order_seconds` | 否 | `number` | 3600 | 秒 | 过滤配送员最近order_seconds内完成的订单 |
 
 **返回示例**
 - 调用成功示例
