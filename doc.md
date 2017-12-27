@@ -25,16 +25,14 @@
 		latitude: -37.80728962839981,
 		longitude: 144.9662161999722,
 		orders: [1594249,1594265],
-		score: 8.3974,
-		uncomplete_order_count:0
+		score: 8.3974
 	}, {
 		driving_type: 2,
 		id: 266,
 		latitude: -37.85284030720391,
 		longitude: 145.1517056488852,
 		orders: [],
-		score: 8.6077,
-		uncomplete_order_count:1
+		score: 8.6077
 	}]
 }
 ```
@@ -56,7 +54,6 @@
 | `driving_type` | `number` | -1(未设定),0(电动自行车),1(摩托车),2(汽车),3(脚踏自行车),4(面包车),5(货车) | 
 | `score` | `number` | 配送员评分(满分10) | 
 | `orders` | `array` | 配送员最近order_seconds内完成的订单 | 
-| `uncomplete_order_count` | `number` | 配送员当前已经有的未完成的订单数量 | 
 
 
 
