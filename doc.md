@@ -13,7 +13,7 @@
 |:----:|:---:|:-----:|:-----:|:-----:|:-----:|
 | `courier_seconds` | 否 | `number` | 900 | 秒 |过滤配送员位置更新时间在最近courier_seconds内的配送员 |
 | `order_seconds` | 否 | `number` | 3600 | 秒 | 过滤配送员最近order_seconds内完成的订单 |
-| `count_day` | 否 | `number` | 14 | 天 | 计算配送员count_day内完成的订单总数和在线时长总数 |
+| `count_day` | 否 | `number` | 14 | 天 | 计算配送员count_day天内完成的订单总数和在线时长总数 |
 
 **返回示例**
 - 调用成功示例
@@ -80,6 +80,8 @@
 | `assigned_orders` | `array` | 已经分配的订单 | 
 | `last_complete_time` | `string` | 上次完成送餐时间 | 
 | `status` | `number` | 配送员配送状态,0(空闲中),1(已分配),2(配送中) | 
+| `count_online_minutes` | `number` | 配送员count_day天内 在线时长总分钟数 | 
+| `count_order` | `number` | 配送员count_day天内完成的订单总数 | 
 
 
 ## 订单接口
