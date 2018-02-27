@@ -207,13 +207,13 @@
 	{
 	    courier_id: 618,
 	    create_time: "2017.01.03 00:02:31",
-	    delivery_time: "2017.01.03 尽快送货",
+	    deliverying_time: "2017.08.06 00:40:45",
 	    id: 454985
 	},
 	{
 	    courier_id: 669,
 	    create_time: "2017.01.03 00:03:36",
-	    delivery_time: "2017.01.03 尽快送货",
+	    deliverying_time: "2017.08.06 00:22:44",
 	    id: 454986
 	}
     ]
@@ -227,4 +227,4 @@
 | `id` | `number` | 订单ID | 
 | `courier_id` | `number` | 配送员ID | 
 | `create_time` | `string` | 订单创建时间 | 
-| `delivery_time` | `string` | 配送员拿到餐时间 | 
+| `deliverying_time` | `string` | 配送员拿到餐时间 | 
