@@ -235,10 +235,15 @@
 
 ## 配送员历史系统订单分配接口（新接口）   
 **请求 URL：** `/api/v1/order/dispatch/history/<string:mode>/<number:val>`
-例如: 
-    `/api/v1/order/dispatch/history/minute/60` 
-    `/api/v1/order/dispatch/history/day/150` 
 **请求方式：** GET
+
+
+例如: 
+
+    `/api/v1/order/dispatch/history/minute/60` 
+    
+    `/api/v1/order/dispatch/history/day/150` 
+
 
 - 调用成功示例
 ```
