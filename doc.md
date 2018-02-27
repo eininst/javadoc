@@ -13,6 +13,7 @@
 |:----:|:---:|:-----:|:-----:|:-----:|:-----:|
 | `courier_seconds` | 否 | `number` | 900 | 秒 |过滤配送员位置更新时间在最近courier_seconds内的配送员 |
 | `order_seconds` | 否 | `number` | 3600 | 秒 | 过滤配送员最近order_seconds内完成的订单 |
+| `count_day` | 否 | `number` | 14 | 天 | 计算配送员count_day内完成的订单总数和在线时长总数 |
 
 **返回示例**
 - 调用成功示例
@@ -27,6 +28,8 @@
 		    order_status: 3 #订单状态, 1(准备中) 2(已分配) 3(配送中)
 		}
 	    ],
+	    count_online_minutes: 45713,
+	    count_order: 1600,
 	    driving_type: 2,
 	    id: 266,
 	    last_complete_time: "2017.11.20 20:39:04",
@@ -43,6 +46,8 @@
 		    order_status: 2
 		}
 	    ],
+	    count_online_minutes: 45713,
+	    count_order: 1600,
 	    driving_type: 1,
 	    id: 353,
 	    last_complete_time: "2017.11.20 20:47:39",
