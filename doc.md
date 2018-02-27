@@ -233,9 +233,7 @@
 
 
 
-## 订单历史记录查询
-**简要描述：** 通过订单ID查询订单信息
-   
+## 配送员历史系统订单分配接口（新接口）   
 **请求 URL：** `/api/v1/order/dispatch/history/<string:mode>/<number:val>`
 例如: 
     `/api/v1/order/dispatch/history/minute/60` 
@@ -252,7 +250,6 @@
 	    dispatch_id: 369137,
 	    order_id: 1594317,
 	    response_time: "2017.11.20 20:59:10",
-	    shop_id: 4079,
 	    status: 2
 	},
 	{
@@ -260,7 +257,6 @@
 	    dispatch_id: 369080,
 	    order_id: 1594259,
 	    response_time: "2017.11.20 20:47:45",
-	    shop_id: 446,
 	    status: 1
 	}
     ]
@@ -271,7 +267,8 @@
 
 | 返回参数名 | 类型 | 说明 |
 |:-----:|:-----:|:-----:|
-| `id` | `number` | 订单ID | 
 | `courier_id` | `number` | 配送员ID | 
-| `create_time` | `string` | 订单创建时间 | 
-| `deliverying_time` | `string` | 配送员拿到餐时间 | 
+| `dispatch_id` | `number` | 系统订单分配号 | 
+| `order_id` | `number` | 订单ID | 
+| `response_time` | `string` | 配送员回复时间 | 
+| `status` | `number` | 0(等待回复),1(接受派单),2(拒绝派单),3(超时，未接受或未拒绝) | 
