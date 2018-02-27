@@ -110,6 +110,7 @@
 			name: "三秦套餐",
 			price: 12.5
 		}],
+		courier_id:0,
 		location: "-37.805744,144.962790",
 		pickup_minutes: -1,
 		post_code: "3144",
@@ -140,6 +141,7 @@
 			name: "皇族香米饭",
 			price: 2
 		}],
+		courier_id:0,
 		location: "-37.806893,145.012289",
 		pickup_minutes: -1,
 		post_code: "3144",
@@ -170,6 +172,7 @@
 | `items` | `array` | 订单商品信息 | 
 | `post_code` | `number` | 顾客邮编 | 
 | `shop_post_code` | `number` | 餐厅邮编 | 
+| `courier_id` | `number` | 配送员ID (0代表未分配配送员) | 
 
 ## 订单查询接口
 **简要描述：** 通过订单ID查询订单信息
