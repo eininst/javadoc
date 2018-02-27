@@ -308,18 +308,18 @@
 
 例如: 
 
-request body:
+	request body:
 
-[
-    {
-	"order_id":1,
-	"courier_id":2
-    },
-    {
-	"order_id":2,
-	"courier_id":3
-    }
-]
+	[
+	    {
+		"order_id":1,
+		"courier_id":2
+	    },
+	    {
+		"order_id":2,
+		"courier_id":3
+	    }
+	]
 - 调用成功示例
 ```
 {
