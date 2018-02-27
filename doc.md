@@ -293,3 +293,36 @@
 | `order_id` | `number` | 订单ID | 
 | `response_time` | `string` | 配送员回复时间 | 
 | `status` | `number` | 0(等待回复),1(接受派单),2(拒绝派单),3(超时，未接受或未拒绝) | 
+
+
+
+
+
+
+## 订单分配接口（新接口） 
+**简要描述：** 把订单分配给配送员
+
+**请求 URL：** `/api/v1/allot`
+
+**请求方式：** POST application/json
+
+例如: 
+
+request body:
+
+[
+    {
+	"order_id":1,
+	"courier_id":2
+    },
+    {
+	"order_id":2,
+	"courier_id":3
+    }
+]
+- 调用成功示例
+```
+{
+    "code": 0
+}
+```
