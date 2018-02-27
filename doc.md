@@ -235,14 +235,20 @@
 
 ## 配送员历史系统订单分配接口（新接口）   
 **请求 URL：** `/api/v1/order/dispatch/history/<string:mode>/<number:val>`
+
 **请求方式：** GET
 
+`mode` 只能为 "minute" 或 "day"
+
+`val` 的值不能大于200
 
 例如: 
 
     `/api/v1/order/dispatch/history/minute/60` 
+    #过去60分钟
     
     `/api/v1/order/dispatch/history/day/150` 
+    #过去150天
 
 
 **请求参数：**
