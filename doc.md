@@ -248,11 +248,13 @@
 例如: 
 
   `过去60分钟`
-  `/api/v1/order/dispatch/history/minute/60` 
+  `/api/v1/order/dispatch/history/minute/60?type=1` 
   
   
   `过去150天`
-  `/api/v1/order/dispatch/history/day/150` 
+  `/api/v1/order/dispatch/history/day/150?type=0` 
+  
+type : 1表示 当前系统分单,  0表示 智能系统分单
    
 
 
@@ -273,6 +275,7 @@
 	    courier_id: 2888,
 	    dispatch_id: 369137,
 	    order_id: 1594317,
+	    type:1,
 	    response_time: "2017.11.20 20:59:10",
 	    status: 2
 	},
@@ -280,6 +283,7 @@
 	    courier_id: 2098,
 	    dispatch_id: 369080,
 	    order_id: 1594259,
+	    type:0,
 	    response_time: "2017.11.20 20:47:45",
 	    status: 1
 	}
