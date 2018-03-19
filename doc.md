@@ -330,6 +330,18 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 - 调用成功示例
 ```
 {
-    "code": 0
+    "code": 0,
+    "data":[
+    	{
+	    "order_id":1,
+	    "courier_id":2,
+	    "success": true
+	},
+	{
+	    "order_id":2,
+	    "courier_id":3,
+	    "success": false
+	}
+    ]
 }
 ```
