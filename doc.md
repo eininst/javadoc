@@ -335,12 +335,12 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
     	{
 	    "order_id":1,
 	    "courier_id":2,
-	    "success": true
+	    "success": true  //通知配送员接单成功
 	},
 	{
 	    "order_id":2,
 	    "courier_id":3,
-	    "success": false
+	    "success": false //通知配送员失败(订单已失效或 配送员处于等待接单状态 等)
 	}
     ]
 }
