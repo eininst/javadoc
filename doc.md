@@ -118,7 +118,8 @@
 		shop_location: "-37.80671299999999,144.96536100000003",
 		shop_post_code: "3128",
 		status: 1,
-		user_id: 14128
+		user_id: 14128,
+		relate_order_id: 16998921
 	},
 	{
 		city_id: 1,
@@ -149,7 +150,8 @@
 		shop_location: "-37.8201379,145.12363119999998",
 		shop_post_code: "3128",
 		status: 1,
-		user_id: 9614
+		user_id: 9614,
+		relate_order_id: 0
 	}]
 }
 
@@ -173,6 +175,7 @@
 | `post_code` | `number` | 顾客邮编 | 
 | `shop_post_code` | `number` | 餐厅邮编 | 
 | `courier_id` | `number` | 配送员ID (0代表未分配配送员) | 
+| `relate_order_id` | `number` | 关联订单号(第二单半价的关联订单号), 0代表没有关联订单 | 
 
 ## 订单查询接口
 **简要描述：** 通过订单ID查询订单信息
