@@ -117,6 +117,7 @@
 例如: 
 
 	request body:
+	
     {
         "name":"test",
         "seq":4
@@ -154,6 +155,7 @@
 例如: 
 
 	request body:
+	
     {
         "name":"test2",
         "seq":20
