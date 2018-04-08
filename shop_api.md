@@ -65,31 +65,6 @@
 }
 ```
 
-## 上传图片(base64模式)
-**简要描述：** 上传图片(base64模式)
- 
-**请求 URL：** `/upload_base64`
-   
-**请求方式：** POST
-
-| 参数名 | 必选 | 类型 |
-|:----:|:---:|:-----:|
-| `token` | 是 | `string` |
-
-**请求示例**
-```
-request body: data:image/jpg;base64....
-```
-
-- 调用成功示例
-```
-{
-    "code": 0,
-    "image": "8f8b343d3af311e897ccf45c89954109.jpg"
-}
-```
-
-
 ## 获取商品分类列表
 **简要描述：** 商品分类列表
  
@@ -144,6 +119,34 @@ request body: data:image/jpg;base64....
 | `create_time` | `string` | 创建时间 | 
 | `update_time` | `string` | 最后修改时间 | 
 
+
+## 获取单个商品分类
+**简要描述：** 通过分类ID获取分类
+ 
+**请求 URL：** `/open_api/shop/v1/categories/<int:category_id>`
+   
+**请求方式：** GET
+   
+**请求参数：**
+
+| 参数名 | 必选 | 类型 | 说明 |
+|:----:|:---:|:-----:|:-----:|
+| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
+
+**返回示例**
+- 调用成功示例
+```
+{
+    "code": 0,
+    "data": {
+        "create_time": "2015.03.17 20:51:09",
+        "id": 26,
+        "name": "全部",
+        "seq": 1,
+        "update_time": "2015.03.17 20:51:09"
+    }
+}
+```
 
 ## 新增商品分类
 **简要描述：** 新增商品分类
@@ -315,6 +318,49 @@ request body: data:image/jpg;base64....
             "update_time": "2015.10.15 22:00:03"
         }
     ]
+}
+```
+
+## 获取单个商品
+**简要描述：** 通过商品ID获取商品
+ 
+**请求 URL：** `/open_api/shop/v1/items/<int:item_id>`
+   
+**请求方式：** GET
+   
+**请求参数：**
+
+| 参数名 | 必选 | 类型 | 说明 |
+|:----:|:---:|:-----:|:-----:|
+| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
+
+**返回示例**
+- 调用成功示例
+```
+{
+    "code": 0,
+    "data": {
+        "category": {
+            "create_time": "2015.06.07 22:58:26",
+            "id": 848,
+            "name": "【特色招牌菜】   ",
+            "seq": 2,
+            "update_time": "2015.07.08 23:56:38"
+        },
+        "desc": "",
+        "group_buy": 0,
+        "group_price": 0,
+        "id": 13578,
+        "image": "http://192.168.31.230:7070/static/uploads/photos/p_20150709000422965515.jpg",
+        "name": "油焖大虾",
+        "option_groups": [],
+        "price": 30,
+        "seq": 3,
+        "shop_id": 14,
+        "stock": 999,
+        "unit": 0,
+        "update_time": "2018.04.08 13:39:54"
+    }
 }
 ```
 
