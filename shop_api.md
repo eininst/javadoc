@@ -384,7 +384,7 @@ request body: data:image/jpg;base64....
 	            }
 	        ]
 	    },
-	    {
+	    	    {
 	    	"name": "辣度",
 	    	"mode":0,
 	    	"options":[
@@ -483,7 +483,7 @@ request body: data:image/jpg;base64....
 ## 上架商品
 **简要描述：** 上架商品
  
-**请求 URL：** `/items/online/<int:item_id>`
+**请求 URL：** `/open_api/shop/v1/items/online/<int:item_id>`
    
 **请求方式：** PUT
    
@@ -495,9 +495,9 @@ request body: data:image/jpg;base64....
 ```
 
 ## 下架商品
-**简要描述：** 下架商品
+**简要描述：** 上架商品
  
-**请求 URL：** `/items/offline/<int:item_id>`
+**请求 URL：** `/open_api/shop/v1/items/offline/<int:item_id>`
    
 **请求方式：** PUT
    
