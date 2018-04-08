@@ -381,7 +381,7 @@
 | `price` | 是 | `string`  | 商品价格 |
 | `stock` | 是 | `string`  | 商品库存 |
 | `seq` | 是 | `string`  | 商品排序序号 |
-| `image` | 是 | `string`  | 商品图片 |
+| `image` | 否 | `string`  | 商品图片 |
 | `group_buy` | 否 | `number`  | 是否开启团购价(0不开启，1开启,默认0) |
 | `group_price` | 否 | `number`  | 团购价格(group_buy为1时生效) |
 | `desc` | 否 | `string`  | 商品描述,展示在商品详情界面上 |
@@ -504,7 +504,7 @@
 | `price` | 是 | `string`  | 商品价格 |
 | `stock` | 是 | `string`  | 商品库存 |
 | `seq` | 是 | `string`  | 商品排序序号 |
-| `image` | 是 | `string`  | 商品图片(通过/open_api/shop/v1/upload 接口获取) |
+| `image` | 否 | `string`  | 商品图片(通过/open_api/shop/v1/upload 接口获取) |
 | `group_buy` | 否 | `number`  | 是否开启团购价(0不开启，1开启,默认0) |
 | `group_price` | 否 | `number`  | 团购价格(group_buy为1时生效) |
 | `desc` | 否 | `string`  | 商品描述,展示在商品详情界面上 |
