@@ -154,6 +154,7 @@ request body: data:image/jpg;base64....
 | `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
 | `name` | 是 | `string`  | 分类名称 |
 | `seq` | 是 | `number`  | 排序序号 |
+
 例如: 
 
 	request body:
@@ -192,6 +193,7 @@ request body: data:image/jpg;base64....
 | `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
 | `name` | 否 | `string`  | 分类名称 |
 | `seq` | 否 | `number`  | 排序序号 |
+
 例如: 
 
 	request body:
@@ -382,7 +384,7 @@ request body: data:image/jpg;base64....
 	            }
 	        ]
 	    },
-	    	    {
+	    {
 	    	"name": "辣度",
 	    	"mode":0,
 	    	"options":[
@@ -493,7 +495,7 @@ request body: data:image/jpg;base64....
 ```
 
 ## 下架商品
-**简要描述：** 上架商品
+**简要描述：** 下架商品
  
 **请求 URL：** `/items/offline/<int:item_id>`
    
