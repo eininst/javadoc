@@ -48,7 +48,7 @@
 ## 上传图片
 **简要描述：** 上传图片
  
-**请求 URL：** `/upload`
+**请求 URL：** `/open_api/shop/v1/upload`
    
 **请求方式：** POST multipart/form-data
 
@@ -504,7 +504,7 @@
 | `price` | 是 | `string`  | 商品价格 |
 | `stock` | 是 | `string`  | 商品库存 |
 | `seq` | 是 | `string`  | 商品排序序号 |
-| `image` | 是 | `string`  | 商品图片 |
+| `image` | 是 | `string`  | 商品图片(通过/open_api/shop/v1/upload 接口获取) |
 | `group_buy` | 否 | `number`  | 是否开启团购价(0不开启，1开启,默认0) |
 | `group_price` | 否 | `number`  | 团购价格(group_buy为1时生效) |
 | `desc` | 否 | `string`  | 商品描述,展示在商品详情界面上 |
@@ -546,11 +546,25 @@
 ```
 
 ## 下架商品
-**简要描述：** 上架商品
+**简要描述：** 下架商品
  
 **请求 URL：** `/open_api/shop/v1/items/offline/<int:item_id>`
    
 **请求方式：** PUT
+   
+- 调用成功示例
+```
+{
+    "code": 0
+}
+```
+
+## 删除商品
+**简要描述：** 删除商品
+ 
+**请求 URL：** `/open_api/shop/v1/items/<int:item_id>`
+   
+**请求方式：** DELETE
    
 - 调用成功示例
 ```
