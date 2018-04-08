@@ -283,7 +283,6 @@
 | 参数名 | 必选 | 类型 | 说明 |
 |:----:|:---:|:-----:|:-----:|
 | `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-
 | `category_id` | 是 | `string`  | 商品分类ID |
 | `name` | 是 | `string`  | 商品名称,字数限制10个 |
 | `price` | 是 | `string`  | 商品价格 |
@@ -407,7 +406,6 @@
 | 参数名 | 必选 | 类型 | 说明 |
 |:----:|:---:|:-----:|:-----:|
 | `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-
 | `category_id` | 是 | `string`  | 商品分类ID |
 | `name` | 是 | `string`  | 商品名称,字数限制10个 |
 | `price` | 是 | `string`  | 商品价格 |
