@@ -319,7 +319,7 @@
 **请求示例**
 ```
 {
-	"category_id": 42908,
+    "category_id": 42908,
     "price": 68,
     "stock": 99,
     "seq": 1,
