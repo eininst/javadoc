@@ -279,9 +279,10 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 	    courier_id: 2888,
 	    dispatch_id: 369137,
 	    order_id: 1594317,
-	    type:1,
+	    type:0,
 	    response_time: "2017.11.20 20:59:10",
-	    status: 2
+	    status: 2,
+	    order_status: 1
 	},
 	{
 	    courier_id: 2098,
@@ -289,7 +290,8 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 	    order_id: 1594259,
 	    type:0,
 	    response_time: "2017.11.20 20:47:45",
-	    status: 1
+	    status: 1,
+	    order_status: 2
 	}
     ]
 }
