@@ -306,7 +306,7 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 | `order_id` | `number` | 订单ID | 
 | `response_time` | `string` | 配送员回复时间 | 
 | `status` | `number` | 0(等待回复),1(接受派单),2(拒绝派单),3(超时，未接受或未拒绝) | 
-
+| `order_status` | `number` | 订单状态 1(准备中) 2(已分配) 3(配送中) 4(已完成)  | 
 
 
 
