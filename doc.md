@@ -103,6 +103,7 @@
 		city_id: 1,
 		create_time: "2017.11.20 20:46:43",
 		delivery_time: "2017.11.20 尽快送货",
+                take_meal_time: "2017-11-20 21:13:06",
 		id: 1594265,
 		items: [{
 			count: 1,
@@ -125,6 +126,7 @@
 		city_id: 1,
 		create_time: "2017.11.20 20:44:42",
 		delivery_time: "2017.11.20 尽快送货",
+                take_meal_time: "2017-11-20 21:14:37",
 		id: 1594249,
 		items: [{
 			count: 1,
@@ -176,7 +178,8 @@
 | `shop_post_code` | `number` | 餐厅邮编 | 
 | `courier_id` | `number` | 配送员ID (0代表未分配配送员) | 
 | `relate_order_id` | `number` | 关联订单号(第二单半价的关联订单号), 0代表没有关联订单 | 
-
+| `take_meal_time` | `string` | 取餐时间， 就是商家什么时候可以把餐做好的时间
+ 
 ## 订单查询接口
 **简要描述：** 通过订单ID查询订单信息
    
