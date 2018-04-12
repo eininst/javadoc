@@ -178,7 +178,7 @@
 | `shop_post_code` | `number` | 餐厅邮编 | 
 | `courier_id` | `number` | 配送员ID (0代表未分配配送员) | 
 | `relate_order_id` | `number` | 关联订单号(第二单半价的关联订单号), 0代表没有关联订单 | 
-| `take_meal_time` | `string` | 取餐时间， 就是商家什么时候可以把餐做好的时间
+| `take_meal_time` | `string` | 取餐时间(yyyy.MM.dd HH:mm:ss),就是商家什么时候可以把餐做好的时间
  
 ## 订单查询接口
 **简要描述：** 通过订单ID查询订单信息
