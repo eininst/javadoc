@@ -113,7 +113,6 @@
 		}],
 		courier_id:0,
 		location: "-37.805744,144.962790",
-		pickup_minutes: -1,
 		post_code: "3144",
 		shop_id: 898,
 		shop_location: "-37.80671299999999,144.96536100000003",
@@ -146,7 +145,6 @@
 		}],
 		courier_id:0,
 		location: "-37.806893,145.012289",
-		pickup_minutes: -1,
 		post_code: "3144",
 		shop_id: 2544,
 		shop_location: "-37.8201379,145.12363119999998",
@@ -172,7 +170,6 @@
 | `user_id` | `number` | 客户ID | 
 | `shop_id` | `number` | 餐馆ID | 
 | `shop_location` | `string` | 餐馆经纬度| 
-| `pickup_minutes` | `number` | 餐厅预估时间 -1(代表没有预估时间) | 
 | `items` | `array` | 订单商品信息 | 
 | `post_code` | `number` | 顾客邮编 | 
 | `shop_post_code` | `number` | 餐厅邮编 | 
