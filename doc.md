@@ -103,7 +103,7 @@
 		city_id: 1,
 		create_time: "2017.11.20 20:46:43",
 		delivery_time: "2017.11.20 尽快送货",
-                take_meal_time: "2017-11-20 21:13:06",
+                take_meal_time: "2017.11.20 21:13:06",
 		id: 1594265,
 		items: [{
 			count: 1,
@@ -126,7 +126,7 @@
 		city_id: 1,
 		create_time: "2017.11.20 20:44:42",
 		delivery_time: "2017.11.20 尽快送货",
-                take_meal_time: "2017-11-20 21:14:37",
+                take_meal_time: "2017.11.20 21:14:37",
 		id: 1594249,
 		items: [{
 			count: 1,
