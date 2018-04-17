@@ -282,7 +282,13 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 	    type:0,
 	    response_time: "2017.11.20 20:59:10",
 	    status: 2,
-	    order_status: 1
+	    order_status: 1,
+	    info:[
+	    	{
+			response_time: "2017.11.20 20:59:10",
+			status: 2
+		}
+	    ]
 	},
 	{
 	    courier_id: 2098,
