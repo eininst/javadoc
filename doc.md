@@ -283,7 +283,7 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 	    response_time: "2017.11.20 20:59:10",
 	    status: 2,
 	    order_status: 1,
-	    detail:[
+	    details:[
 	    	{
 		    response_time: "2017.11.20 20:59:10",
 		    status: 2
