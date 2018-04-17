@@ -3,7 +3,7 @@
 ## 获取token
 **简要描述：** 通过商家的账号密码获取token
  
-**请求 URL：** `/open_api/shop/v1/access_token`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/access_token`
    
 **请求方式：** POST
    
@@ -48,7 +48,7 @@
 ## 上传图片
 **简要描述：** 上传图片
  
-**请求 URL：** `/open_api/shop/v1/upload`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/upload`
    
 **请求方式：** POST multipart/form-data
 
@@ -68,7 +68,7 @@
 ## 获取商品分类列表
 **简要描述：** 商品分类列表
  
-**请求 URL：** `/open_api/shop/v1/categories`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories`
    
 **请求方式：** GET
    
@@ -123,7 +123,7 @@
 ## 获取单个商品分类
 **简要描述：** 通过分类ID获取分类
  
-**请求 URL：** `/open_api/shop/v1/categories/<int:category_id>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories/<int:category_id>`
    
 **请求方式：** GET
    
@@ -151,7 +151,7 @@
 ## 新增商品分类
 **简要描述：** 新增商品分类
  
-**请求 URL：** `/open_api/shop/v1/categories`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories`
    
 **请求方式：** POST application/json
    
@@ -190,7 +190,7 @@
 ## 修改商品分类
 **简要描述：** 新增商品分类
  
-**请求 URL：** `/open_api/shop/v1/categories/<int:category_id>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories/<int:category_id>`
    
 **请求方式：** PUT application/json
    
@@ -229,7 +229,7 @@
 ## 删除商品分类
 **简要描述：** 删除商品分类
  
-**请求 URL：** `/open_api/shop/v1/categories/<int:category_id>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories/<int:category_id>`
    
 **请求方式：** DELETE
    
@@ -257,7 +257,7 @@
 ## 获取商品列表
 **简要描述：** 获取商品列表
  
-**请求 URL：** `/open_api/shop/v1/items`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items`
    
 **请求方式：** GET
    
@@ -324,7 +324,7 @@
 ## 获取单个商品
 **简要描述：** 通过商品ID获取商品
  
-**请求 URL：** `/open_api/shop/v1/items/<int:item_id>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/<int:item_id>`
    
 **请求方式：** GET
    
@@ -367,7 +367,7 @@
 ## 新增商品
 **简要描述：** 新增商品
  
-**请求 URL：** `/open_api/shop/v1/items`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items`
    
 **请求方式：** POST
    
@@ -490,7 +490,7 @@
 ## 修改商品
 **简要描述：** 修改商品
  
-**请求 URL：** `/open_api/shop/v1/items/<int:item_id>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/<int:item_id>`
    
 **请求方式：** PUT
    
@@ -534,7 +534,7 @@
 ## 上架商品
 **简要描述：** 上架商品
  
-**请求 URL：** `/open_api/shop/v1/items/online/<int:item_id>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/online/<int:item_id>`
    
 **请求方式：** PUT
    
@@ -548,7 +548,7 @@
 ## 下架商品
 **简要描述：** 下架商品
  
-**请求 URL：** `/open_api/shop/v1/items/offline/<int:item_id>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/offline/<int:item_id>`
    
 **请求方式：** PUT
    
@@ -562,7 +562,7 @@
 ## 删除商品
 **简要描述：** 删除商品
  
-**请求 URL：** `/open_api/shop/v1/items/<int:item_id>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/<int:item_id>`
    
 **请求方式：** DELETE
    
