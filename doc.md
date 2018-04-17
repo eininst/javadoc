@@ -3,7 +3,7 @@
 ## 配送员接口
 **简要描述：** 获取当前可分配订单的配送员 
  
-**请求 URL：** `/api/v1/couriers`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/couriers`
    
 **请求方式：** GET
    
@@ -88,7 +88,7 @@
 
 **简要描述：** 获取当前可分配的订单
  
-**请求 URL：** `/api/v1/orders`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/orders`
    
 **请求方式：** GET
    
@@ -180,7 +180,7 @@
 ## 订单查询接口
 **简要描述：** 通过订单ID查询订单信息
    
-**请求 URL：** `/api/v1/order/query`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/order/query`
    
 **请求方式：** GET
 
@@ -201,7 +201,7 @@
 ## 订单历史记录查询
 **简要描述：** 通过日期(yyyy-MM-dd)查询订单信息
    
-**请求 URL：** `/api/v1/order/history/2017.08.06`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/order/history/2017.08.06`
    
 **请求方式：** GET
 
@@ -240,7 +240,7 @@
 
 
 ## 配送员历史系统订单分配接口（新接口）   
-**请求 URL：** `/api/v1/order/dispatch/history/<string:mode>/<number:val>`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/order/dispatch/history/<string:mode>/<number:val>`
 
 **请求方式：** GET
 
@@ -251,11 +251,11 @@
 例如: 
 
   `过去60分钟`
-  `/api/v1/order/dispatch/history/minute/60?type=1` 
+  `https://www.melbsc.com.au/api/shop/open/v1/order/dispatch/history/minute/60?type=1` 
   
   
   `过去150天`
-  `/api/v1/order/dispatch/history/day/150?type=0` 
+  `https://www.melbsc.com.au/api/shop/open/v1/order/dispatch/history/day/150?type=0` 
   
 type : 1表示 当前系统分单,  0表示 智能系统分单
    
@@ -325,7 +325,7 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 ## 订单分配接口（新接口） 
 **简要描述：** 把订单分配给配送员
 
-**请求 URL：** `/api/v1/allot`
+**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/allot`
 
 **请求方式：** POST application/json
 
