@@ -32,6 +32,7 @@
 	    count_order: 1600,
 	    driving_type: 2,
 	    id: 266,
+	    name: 'xxxxxx',
 	    last_complete_time: "2017.11.20 20:39:04",
 	    latitude: -37.85284030720391,
 	    longitude: 145.1517056488852,
@@ -50,6 +51,7 @@
 	    count_order: 1600,
 	    driving_type: 1,
 	    id: 353,
+	    name: 'xxxxxxx',
 	    last_complete_time: "2017.11.20 20:47:39",
 	    latitude: -37.81329829136199,
 	    longitude: 144.9507007290231,
@@ -72,6 +74,7 @@
 | 返回参数名 | 类型 | 说明 |
 |:-----:|:-----:|:-----:|
 | `id` | `number` | 配送员ID | 
+| `name` | `string` | 配送员名称 | 
 | `longitude` | `number` | 配送员经度 | 
 | `latitude` | `number` | 配送员纬度 | 
 | `driving_type` | `number` | -1(未设定),0(电动自行车),1(摩托车),2(汽车),3(脚踏自行车),4(面包车),5(货车) | 
