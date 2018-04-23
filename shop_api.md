@@ -369,7 +369,7 @@
  
 **请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items`
    
-**请求方式：** POST
+**请求方式：** POST application/json
    
 **请求参数：**
 
@@ -492,7 +492,7 @@
  
 **请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/<int:item_id>`
    
-**请求方式：** PUT
+**请求方式：** PUT application/json
    
 **请求参数：**
 
