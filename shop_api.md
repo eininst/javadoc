@@ -5,7 +5,7 @@
  
 **请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/access_token`
    
-**请求方式：** POST
+**请求方式：** POST application/x-www-form-urlencoded
    
 **请求参数：**
 
