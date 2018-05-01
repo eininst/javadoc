@@ -80,7 +80,7 @@
 | `longitude` | `number` | 配送员经度 | 
 | `latitude` | `number` | 配送员纬度 | 
 | `driving_type` | `number` | -1(未设定),0(电动自行车),1(摩托车),2(汽车),3(脚踏自行车),4(面包车),5(货车) | 
-| `score` | `number` | 配送员评分(满分10) | 
+| `score` | `number` | 配送员评分(满分5) | 
 | `orders` | `array` | 配送员最近order_seconds内完成的订单 | 
 | `assigned_orders` | `array` | 已经分配的订单 | 
 | `last_complete_time` | `string` | 上次完成送餐时间 | 
