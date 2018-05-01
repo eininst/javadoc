@@ -33,6 +33,7 @@
 	    driving_type: 2,
 	    id: 266,
 	    name: 'xxxxxx',
+	    order_count_limit: 10,
 	    last_complete_time: "2017.11.20 20:39:04",
 	    latitude: -37.85284030720391,
 	    longitude: 145.1517056488852,
@@ -52,6 +53,7 @@
 	    driving_type: 1,
 	    id: 353,
 	    name: 'xxxxxxx',
+	    order_count_limit: 10,
 	    last_complete_time: "2017.11.20 20:47:39",
 	    latitude: -37.81329829136199,
 	    longitude: 144.9507007290231,
@@ -85,6 +87,7 @@
 | `status` | `number` | 配送员配送状态,0(空闲中),1(已分配),2(配送中) | 
 | `count_online_minutes` | `number` | 配送员count_day天内 在线时长总分钟数 | 
 | `count_order` | `number` | 配送员count_day天内完成的订单总数 | 
+| `order_count_limit` | `number` | 配送员允许分配的最大订单数 | 
 
 
 ## 订单接口
@@ -362,5 +365,22 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 	    "success": false //通知配送员失败(订单已失效或 配送员处于等待接单状态, 订单未打印等)
 	}
     ]
+}
+```
+
+
+## 获取自动分单开关是否开启（新接口） 
+**简要描述：** 把订单分配给配送员
+
+**请求 URL：** `/api/v1/automatic_distribution`
+
+**请求方式：** GET
+
+
+- 调用成功示例
+```
+{
+    code: 0,
+    data: false  //true:已开启，false: 未开启
 }
 ```
