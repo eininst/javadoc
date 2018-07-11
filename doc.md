@@ -392,7 +392,7 @@ type : 1表示 当前系统分单,  0表示 智能系统分单
 
 **请求 URL：** `/api/v1/unautomatic`
 
-**请求方式：** POST application/json
+**请求方式：** PUT application/json
 
 例如: 
 
