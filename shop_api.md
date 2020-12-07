@@ -1,574 +1,262 @@
-# 墨尔本送餐 商家商品API 接口文档
+## Requests
+### 设置timeout
 
-## 获取token
-**简要描述：** 通过商家的账号密码获取token
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/access_token`
-   
-**请求方式：** POST application/x-www-form-urlencoded
-   
-**请求参数：**
+requests.get(url, timeout=10)
+> 默认timeout是None, 表示没有限制, **永久等待!!!**
+>
+> **一定要设置timeout**
 
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `login_name` | 是 | `string`  |商家登录账号 |
-| `password` | 是 | `string`  | 商家登录密码 |
 
-**返回示例**
-- 调用成功示例
+
+
+### Http连接池
+
+HTTP协议是无状态的协议，即每一次请求都是互相独立的。因此它的最初实现是，每一个http请求都会打开一个tcp socket连接，当交互完毕后会关闭这个连接。
+
+所以建立连接与断开连接是要经过三次握手与四次挥手的。显然在这种设计中，每次发送Http请求都会消耗很多的额外资源，即连接的建立与销毁。
+
+
+ **在HTTP/1.1协议 支持了长链接协议， 我们可以配合连接池提前建立好连接，减少这本部分消耗**
+>  性能大概会提升3倍左右
+
+### 使用Request Session
+requests 已经封装好了Session的长连接类, 可以直接使用
+
+```python
+
+session = requests.Session()
+session.mount('http://', HTTPAdapter(pool_connections=10, pool_maxsize=10, max_retries=2))
+session.mount('https://', HTTPAdapter(pool_connections=10, pool_maxsize=10, max_retries=2))
+session.get(url, timeout=10)
+        
 ```
-{
-    "code": 0,
-    "manager": {
-        "expired_in": 31536000,
-        "shop_id": 14,
-        "shop_name": "墨尔本卤味工坊",
-        "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTU1NDY1OTE5NywiaWF0IjoxNTIzMTIzMTk3fQ.eyJpZCI6Mn0.LSvakghfQlTiP_JiVAcXlSA-Ob4nH-mP2NVgOINF0oU"
-    }
-}
-```
-- 调用失败示例
-```
-{
-    "code": 100,
-    "message": "登录账号不能为空"
-}
-```
-
-**调用成功返回参数说明：**
-
-| 返回参数名 | 类型 | 说明 |
-|:-----:|:-----:|:-----:|
-| `expired_in` | `number` | 失效时间(秒) | 
-| `shop_id` | `number` | 商家ID | 
-| `shop_name` | `number` | 商家名称 | 
-| `token` | `number` | token请求其他接口需要携带 | 
+> pool_connections 连接池大小,  要维持多少连接
+> 
+> pool_maxsize 最大支持多少连接
+> 
+> max_retries 请求失败的重试次数，默认0
 
 
-## 上传图片
-**简要描述：** 上传图片
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/upload`
-   
-**请求方式：** POST multipart/form-data
+## SQS
+### Producer (生产者)
+**参数说明：** 
 
-| 参数名 | 必选 | 类型 |
-|:----:|:---:|:-----:|
-| `file` | 是 | `file` |
-| `token` | 是 | `string` |
+|参数名|必传|类型|说明|
+|:----    |:---|:----- |-----   |
+|address |是  |string |队列名称   |
+|msg  |是  |object | 消息内容, 可以被json序列化的对象    |
+|key      |否  |string | 该队列下的唯一标示,  出现问题，可以快速精确定位到消息 |
+|group_id  |否  |string | 分组名， 有序队列必须设置该参数， 用于标示，消息在该分组下有序   |
+|delay_seconds  |否  |int | 延迟xx秒后再发送, 最大支持 7200 秒|
 
-- 调用成功示例
-```
-{
-    "code": 0,
-    "image": "8f8b343d3af311e897ccf45c89954109.jpg"
-}
+#### 发送无序消息
+```python
+producer.publish("test", "hello world")
 ```
 
-## 获取商品分类列表
-**简要描述：** 商品分类列表
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories`
-   
-**请求方式：** GET
-   
-**请求参数：**
-
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-
-**返回示例**
-- 调用成功示例
-```
-{
-    "code": 0,
-    "data": [
-        {
-            "create_time": "2015.03.17 20:51:09",
-            "id": 26,
-            "name": "全部",
-            "seq": 1,
-            "update_time": "2015.03.17 20:51:09"
-        },
-        {
-            "create_time": "2015.06.07 22:58:26",
-            "id": 848,
-            "name": "【特色招牌菜】   ",
-            "seq": 2,
-            "update_time": "2015.07.08 23:56:38"
-        },
-        {
-            "create_time": "2015.06.07 22:57:50",
-            "id": 847,
-            "name": "【秘制冒菜】",
-            "seq": 3,
-            "update_time": "2015.07.08 23:56:38"
-        }
-    ]
-}
+#### 发送有序消息
+```python
+producer.publish("test.fifo", "hello world", group_id="test")
 ```
 
-**调用成功返回参数说明：**
-
-| 返回参数名 | 类型 | 说明 |
-|:-----:|:-----:|:-----:|
-| `id` | `number` | 分类ID | 
-| `name` | `number` | 分类名称 | 
-| `seq` | `number` | 排序序号 | 
-| `create_time` | `string` | 创建时间 | 
-| `update_time` | `string` | 最后修改时间 | 
-
-
-## 获取单个商品分类
-**简要描述：** 通过分类ID获取分类
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories/<int:category_id>`
-   
-**请求方式：** GET
-   
-**请求参数：**
-
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-
-**返回示例**
-- 调用成功示例
-```
-{
-    "code": 0,
-    "data": {
-        "create_time": "2015.03.17 20:51:09",
-        "id": 26,
-        "name": "全部",
-        "seq": 1,
-        "update_time": "2015.03.17 20:51:09"
-    }
-}
+#### 发送延迟消息
+```python
+producer.publish("test.fifo", "hello world", delay_seconds=30)
 ```
 
-## 新增商品分类
-**简要描述：** 新增商品分类
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories`
-   
-**请求方式：** POST application/json
-   
-**请求参数：**
+#### 批量发送
+```python
+producer.session.add("test", "hello world")
+producer.session.add("test", "hello world")
+producer.session.add("test.fifo", "hello world", delay_seconds=30)
+producer.session.add("test.fifo", "hello world", delay_seconds=30)
+producer.session.commit()
+```
 
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-| `name` | 是 | `string`  | 分类名称 |
-| `seq` | 是 | `number`  | 排序序号 |
+> 如果一个请求 会涉及到 发送多个消息, 建议都使用Session模式, 进行批量发送
 
-例如: 
+1. `add会把要发送的消息保存 request context (g)`
+2. `commit的时候会调用批量发送接口统一发送消息`
+3. `和 db.session.add 用法类似`
 
-	request body:
+
+#### 有序和无序队列区别:
+`无序队列:`
+
+1. 无序队列只能保证至少收到一次消息
+2. 支持接近无限的每秒吞吐量, 加硬件就可以提示吞吐量
+3. 支持延迟消息
+3. 尽可能的有序
+
+`有序队列:`
+
+1. 保证先发的消息一定会先收到
+2. 不支持延迟消息
+3. 每秒最大事务数3000
+
+
+### Consumer (消费者)
+**参数说明：** 
+
+|参数名|必传|类型|说明|
+|:------------------|:------------------|:----- |-----   |
+| address |是  |string |队列名称   |
+| call  |是  | function | 处理消息的函数    |
+| consumer_ thread_ number  |否  |int | 消费线程数(默认4个) |
+| msg_lifetime  |否  |int | 消息过期时间, 多少秒后没收到消息丢弃消息(默认 86400 * 3)   |
+| visibility_ timeout_ seconds  |否  |int | 可见性超时(默认300秒) |
+| is_retry  |否  | bool | 业务抛出异常是否进行重试(默认True) |
+
+#### 可见性超时
+* 在收到消息后，消息将立即保留在队列中。为防止其他使用者再次处理消息，Amazon SQS 设置了可见性超时，这是 Amazon SQS 防止其他使用者接收和处理消息的时间段。消息的默认可见性超时为 30 秒。最小值为 0 秒。最大值为 12 小时
+
+* 对于标准队列,可见性超时不能保证不会两次收到消息。将订阅方程序设计为幂等 应用程序 (多次处理同一消息时，它们不应受到不利影响)
+
+* 程序处理时间 超过 可见性超时, 其他服务器 将可以获取到该消息
+
+> 重试机制就是利用可见性超时实现的， 订阅方如果抛出异常， 消息将不会被删除， 等待到达可见性超时时间之后再次获取到该消息
+
+
+## RedisLock
+### 什么情况下需要加锁?
+当多个请求、多个线程等, 用户同时竞争同一个资源时，需要加锁。比如，下订单减库存，抢票，选课，抢红包等。如果在此处没有锁的控制，会导致很严重的问题，下订单减库存的时候不加锁，会导致商品超卖; 抢票的时候不加锁，会导致两个人抢到同一个位置;
+
+### 常见的分布式锁
+1. 基于数据库实现分布式锁 (利用 select … where … for update 排他锁 或是 乐观锁)
+2. RedisLock
+3. 基于Zookeeper实现分布式锁
+
+#### 对比
+> 数据库
+
+*  `简单, 容易理解和实现`
+* db操作性能较差，并且有锁表的风险
+* 非阻塞操作失败后，需要轮询，占用cpu资源;
+* 长时间不commit或者长时间轮询，可能会占用较多连接资源
+
+> Redis
+
+* `性能好`
+* 过期时间不好控制
+* 非阻塞，需要有锁的情况，需要自旋轮训 排队等待, 占用cpu资源;
+
+> ZK
+
+* 更可靠
+* 性能不如redis的实现
+
+```
+zk锁性能比redis低的原因：zk中的角色分为leader，flower，
+每次写请求只能请求leader，leader会把写请求广播到所有flower，
+如果flower都成功才会提交给leader，其实这里相当于一个2PC的过程。
+在加锁的时候是一个写请求，当写请求很多时，zk会有很大的压力，最后导致服务器响应很慢
+```
 	
-    {
-        "name":"test",
-        "seq":4
+#### RedisLock不靠谱的情况:
+    例如一主二从。我们的set命令对应的数据写到主库，然后同步到从库。
+    当我们申请一个锁的时候，对应就是一条命令 setnx mykey myvalue ，在redis sentinel集群中，这条命令先是落到了主库。
+    假设这时主库down了，而这条数据还没来得及同步到从库，sentinel将从库中的一台选举为主库了。
+    这时，我们的新主库中并没有mykey这条数据，若此时另外一个client执行 setnx mykey hisvalue , 也会成功，即也能得到锁。
+    这就意味着，此时有两个client获得了锁。
+    
+    不过这种是概率极低的现象， 只会在主从集群redis, 当主实例挂掉的情况 可能会出现
+    
+   
+### RedisLock使用方式
+```python
+#lock_name可以理解为锁的范围， 比如lock_name=update_odb_order_123 代表对123这个订单加锁
+    
+with RedisLock(lock_name='update_odb_order_123', timeout=30, expire=30) as is_success:
+	 if is_success:
+		# 加锁成功
+            order = Order.query.get(123)
+            update_odb(order)
+	 else:
+		return    	
+            
+	#在这里面使用update_odb更新order为123的相关信息是原子操作
+```
+
+**1. timeout 等待锁的超时时间(秒)**
+
+**2. expire 锁的存活时间(秒), (在redis突然挂掉的时候,用于防止死锁现象)**
+
+> 锁的时间控制， 要预估业务代码的耗时， 如果业务代码执行时间超过timeout(等待锁的时间), 那么其他用户就会进来, **is_success** 就会返回False
+> 
+> 不控制is_success(是否加锁成功的话),  可以理解为只能保证尽可能的 **"原子性"**
+
+
+## 乐观锁
+### 乐观锁原理
+* 表设计时，需要往表里加一个version字段
+* 更新数据时，判断数据库的version与当前对象的version 值是否相同，如果相同则更新数据, 并把version 进行+1
+* 如果version不一致, 则说明，该数据并发了， 已被人修改过了
+* 进行自旋轮训，重新获取数据进行更新， 直到更新成功
+
+### 什么时候使用乐观锁?
+1. 在并发更新数据的时候, 保证数据一致性, 例如扣库存， 修改订单状态等
+2. 适用于竞争不激烈的场景， 对性能要求不高的业务
+
+### 乐观锁助手
+**首先在model 里面增加 version_id 字段**
+
+```python
+# 默认version_id 会自增
+class User(Base):
+    __tablename__ = 'user'
+
+    id = Column(Integer, primary_key=True)
+    version_id = Column(Integer, nullable=False)
+    name = Column(String(50), nullable=False)
+
+    __mapper_args__ = {
+        "version_id_col": version_id
     }
+    
+# Custom Version Counters / Types
+import uuid
 
-**返回示例**
-- 调用成功示例
-```
-{
-    "code": 0
-}
-```
-- 调用失败示例
-```
-{
-    "code": 400,
-    "message": "seq只能是数字"
-}
-```
+class User(Base):
+    __tablename__ = 'user'
 
-## 修改商品分类
-**简要描述：** 新增商品分类
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories/<int:category_id>`
-   
-**请求方式：** PUT application/json
-   
-**请求参数：**
+    id = Column(Integer, primary_key=True)
+    version_uuid = Column(String(32), nullable=False)
+    name = Column(String(50), nullable=False)
 
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-| `name` | 否 | `string`  | 分类名称 |
-| `seq` | 否 | `number`  | 排序序号 |
-
-例如: 
-
-	request body:
-	
-    {
-        "name":"test2",
-        "seq":20
+    __mapper_args__ = {
+        'version_id_col':version_uuid,
+        'version_id_generator':lambda version: uuid.uuid4().hex
     }
-
-**返回示例**
-- 调用成功示例
-```
-{
-    "code": 0
-}
-```
-- 调用失败示例
-```
-{
-    "code": 400,
-    "message": "分类不存在"
-}
 ```
 
-## 删除商品分类
-**简要描述：** 删除商品分类
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/categories/<int:category_id>`
-   
-**请求方式：** DELETE
-   
-**请求参数：**
+ **然后在执行修改的方法上加 @version_lock修饰器，@version_lock修饰器示例说明如下**
 
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
+ ```python
+@version_lock 表示：
+最大重试5次，每次重试前等待0.01秒
+超过重试此时后抛出ServiceException异常, code:400, msg: The network is busy, please try again later
 
-**返回示例**
-- 调用成功示例
-```
-{
-    "code": 0
-}
-```
-- 调用失败示例
-```
-{
-    "code": 400,
-    "message": "分类不存在"
-}
-```
+@version_lock(max_retry_num=6,retry_sleep_time=5,try_max_end_exception=ServiceException(code=401,msg='我错了'))
+最大重试6次，每次重试前等待5秒
+超过重试此时后抛出ServiceException异常, code:401, msg: 我错了
 
-## 获取商品列表
-**简要描述：** 获取商品列表
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items`
-   
-**请求方式：** GET
-   
-**请求参数：**
+@version_lock(try_max_end_return=(True,12))
+最大重试5次，每次重试前等待0.01秒
+超过重试此时后 返回(True,12)
 
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
+@version_lock(try_max_end_return=return_function)
+最大重试5次，每次重试前等待0.01秒
+超过重试此时后 执行 return_function 方法 并返回返回值
 
-**返回示例**
-- 调用成功示例
-```
-{
-    "code": 0,
-    "data": [
-        {
-            "category": {
-                "create_time": "2015.06.07 22:58:26",
-                "id": 848,
-                "name": "【特色招牌菜】   ",
-                "seq": 2,
-                "update_time": "2015.07.08 23:56:38"
-            },
-            "desc": "本店冷吃兔 人气畅销 麻辣鲜香 嚼劲十足 川味典范～独道的正宗四川手艺！",
-            "group_buy": 0,
-            "group_price": 0,
-            "id": 355,
-            "image": "p_20150317230401289019.jpg",
-            "name": "冷吃兔",
-            "option_groups": [],
-            "price": 20,
-            "seq": 2,
-            "shop_id": 14,
-            "stock": 999,
-            "unit": 0,
-            "update_time": "2015.10.15 22:00:03"
-        },
-        {
-            "category": {
-                "create_time": "2015.06.07 22:58:26",
-                "id": 848,
-                "name": "【特色招牌菜】   ",
-                "seq": 2,
-                "update_time": "2015.07.08 23:56:38"
-            },
-            "desc": "冷吃牛肉是四川特色之一，刀工精细 做工讲究 风味独特 鲜味悠长～",
-            "group_buy": 0,
-            "group_price": 30,
-            "id": 357,
-            "image": "p_20150318000158603580.jpg",
-            "name": "冷吃牛肉",
-            "option_groups": [],
-            "price": 20,
-            "seq": 4,
-            "shop_id": 14,
-            "stock": 999,
-            "unit": 0,
-            "update_time": "2015.10.15 22:00:03"
-        }
-    ]
-}
-```
+@version_lock(try_exception_run_fun=try_exception_run_fun)
+最大重试5次，每次重试前 执行stale_data_error_run_fun 方法并等待0.01秒
+超过重试此时后抛出ServiceException异常, code:400, msg: The network is busy, please try again later
 
-## 获取单个商品
-**简要描述：** 通过商品ID获取商品
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/<int:item_id>`
-   
-**请求方式：** GET
-   
-**请求参数：**
-
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-
-**返回示例**
-- 调用成功示例
-```
-{
-    "code": 0,
-    "data": {
-        "category": {
-            "create_time": "2015.06.07 22:58:26",
-            "id": 848,
-            "name": "【特色招牌菜】   ",
-            "seq": 2,
-            "update_time": "2015.07.08 23:56:38"
-        },
-        "desc": "",
-        "group_buy": 0,
-        "group_price": 0,
-        "id": 13578,
-        "image": "http://192.168.31.230:7070/static/uploads/photos/p_20150709000422965515.jpg",
-        "name": "油焖大虾",
-        "option_groups": [],
-        "price": 30,
-        "seq": 3,
-        "shop_id": 14,
-        "stock": 999,
-        "unit": 0,
-        "update_time": "2018.04.08 13:39:54"
-    }
-}
-```
-
-## 新增商品
-**简要描述：** 新增商品
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items`
-   
-**请求方式：** POST application/json
-   
-**请求参数：**
-
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-| `category_id` | 是 | `string`  | 商品分类ID |
-| `name` | 是 | `string`  | 商品名称,字数限制10个 |
-| `price` | 是 | `string`  | 商品价格 |
-| `stock` | 是 | `string`  | 商品库存 |
-| `seq` | 是 | `string`  | 商品排序序号 |
-| `image` | 否 | `string`  | 商品图片 |
-| `group_buy` | 否 | `number`  | 是否开启团购价(0不开启，1开启,默认0) |
-| `group_price` | 否 | `number`  | 团购价格(group_buy为1时生效) |
-| `desc` | 否 | `string`  | 商品描述,展示在商品详情界面上 |
-| `option_group` | 否 | `json`  | 商品选项组 |
+:param max_retry_num: 最大重试次数
+:param retry_sleep_time: 重试时睡眠时间(秒)
+:param try_max_end_return: 达到最大次数后 （返回的 tuple 或者 运行的fun） 如果没有将抛出异常
+:param try_max_end_exception: 自定义抛出异常  （默认抛出 ServiceException(code=400, msg='xx') ）
+:param try_exception_run_fun:  抛出 StaleDataError 时 可以执行的function 参数中有 retry_exception 为 拦截的异常
+ ```
 
 
-```
-"option_group":[
-	{
-	    "name":"规格口味", //选项组名称,必填
-	    "mode": 0, //模式(单选0，多选1),必填
-	    "limit": 0, //数量限制(0为不限制),非必填
-	    "min": 0, //最少选择数量(mode为1时生效,0为不限制),非必填
-	    "options":[
-	        {
-	            "name": "香锅小龙虾", //选项名称,必填
-	            "price": 70.8 //价格,必填
-	        },
-	        {
-	            "name": "蒜泥小龙虾", //选项名称,必填
-	            "price": 68 //价格,必填
-	        }
-	    ]
-	}
-]
-```
-
-**请求示例**
-```
-{
-    "category_id": 42908,
-    "price": 68,
-    "stock": 99,
-    "seq": 1,
-    "name": "精品小龙虾2",
-    "desc": "汤面不宜久放，请及时食用",
-    "option_group":[
-	    {
-	        "name":"规格口味",
-	        "mode": 0,
-	        "limit": 0, 
-	        "min": 0, 
-	        "options":[
-	            {
-	                "name": "香锅小龙虾", 
-	                "price": 70.8 
-	            },
-	            {
-	                "name": "蒜泥小龙虾", 
-	                "price": 68 
-	            }
-	        ]
-	    },
-	    {
-	    	"name": "辣度",
-	    	"mode":0,
-	    	"options":[
-	    		{	
-	    			"name": "不辣",
-	    			"price": 0
-	    		},
-	    		{	
-	    			"name": "不辣",
-	    			"price": 0
-	    		},
-	    		{	
-	    			"name": "不辣",
-	    			"price": 0
-	    		}
-	    	]
-	    },
-	    {
-	    	"name": "加菜",
-	    	"mode": 1,
-	    	"options":[
-	    		{
-	    			"name": "年糕",
-	    			"price": 4
-	    		},
-	    		{
-	    			"name": "午餐肉",
-	    			"price": 12
-	    		}
-	    	]
-	    }
-	]
-}
-```
-
-- 调用成功示例
-```
-{
-    "code": 0
-}
-```
-- 调用失败示例
-```
-{
-    "code": 400,
-    "message": "name不能为空"
-}
-```
-
-
-
-## 修改商品
-**简要描述：** 修改商品
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/<int:item_id>`
-   
-**请求方式：** PUT application/json
-   
-**请求参数：**
-
-| 参数名 | 必选 | 类型 | 说明 |
-|:----:|:---:|:-----:|:-----:|
-| `token` | 是 | `string`  | 需要携带在request header(通过access_token接口获取) |
-| `category_id` | 是 | `string`  | 商品分类ID |
-| `name` | 是 | `string`  | 商品名称,字数限制10个 |
-| `price` | 是 | `string`  | 商品价格 |
-| `stock` | 是 | `string`  | 商品库存 |
-| `seq` | 是 | `string`  | 商品排序序号 |
-| `image` | 否 | `string`  | 商品图片(通过/open_api/shop/v1/upload 接口获取) |
-| `group_buy` | 否 | `number`  | 是否开启团购价(0不开启，1开启,默认0) |
-| `group_price` | 否 | `number`  | 团购价格(group_buy为1时生效) |
-| `desc` | 否 | `string`  | 商品描述,展示在商品详情界面上 |
-| `option_group` | 否 | `json`  | 商品选项组 |
-
-
-**请求示例**
-```
-参考  [新增商品](#新增商品)
-```
-
-- 调用成功示例
-```
-{
-    "code": 0
-}
-```
-- 调用失败示例
-```
-{
-    "code": 400,
-    "message": "name不能为空"
-}
-```
-
-
-## 上架商品
-**简要描述：** 上架商品
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/online/<int:item_id>`
-   
-**请求方式：** PUT
-   
-- 调用成功示例
-```
-{
-    "code": 0
-}
-```
-
-## 下架商品
-**简要描述：** 下架商品
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/offline/<int:item_id>`
-   
-**请求方式：** PUT
-   
-- 调用成功示例
-```
-{
-    "code": 0
-}
-```
-
-## 删除商品
-**简要描述：** 删除商品
- 
-**请求 URL：** `https://www.melbsc.com.au/api/shop/open/v1/items/<int:item_id>`
-   
-**请求方式：** DELETE
-   
-- 调用成功示例
-```
-{
-    "code": 0
-}
-```
