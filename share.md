@@ -89,32 +89,6 @@ model = Model(**BeanUtils.obj2dict(dto))
 ```
 
 
-## 外卖管理台权限
-**权限目前是控制到页面级别,  既不同的账号 看到的页面不一样**
-
-* 账号表 -> 角色表, 一对多
-* 角色 -> 菜单, 一对多
-
-#### 定义一个菜单
-```python
-mod = Blueprint('lab', __name__, url_prefix='/lab')
-
-@mod.route('config_index', methods=['GET'], is_menu=True, menu_name=u'实验功能配置')
-@requires_login
-def config_index():
-    return render_template('lab/config.html')
-```
-> 定义路由时， 传入 **is_menu**参数， 声明是一个菜单路由,  menu_name设置菜单名称
-
-#### 控制菜单的接口权限
-例如上面的例子, lab/config.html页面 可以访问哪些接口?
-
-* 菜单接口访问的隔离是按照 **Blueprint** 级别的
-* 既 lab/config.html页面 只能访问 Blueprint('lab', __name__, url_prefix='/lab') 这个蓝图 定义的接口
-
-> 管理台一个页面对应一个蓝图 ,  这样开发才能保证接口的权限
-
-
 ## Requests
 ### 设置timeout
 
@@ -122,8 +96,6 @@ requests.get(url, timeout=10)
 > 默认timeout是None, 表示没有限制, **永久等待!!!**
 >
 > **一定要设置timeout**
-
-
 
 
 ### Http连接池
@@ -152,6 +124,35 @@ session.get(url, timeout=10)
 > pool_maxsize 最大支持多少连接
 > 
 > max_retries 请求失败的重试次数，默认0
+
+
+
+
+## 外卖管理台权限
+**权限目前是控制到页面级别,  既不同的账号 看到的页面不一样**
+
+* 账号表 -> 角色表, 一对多
+* 角色 -> 菜单, 一对多
+
+#### 定义一个菜单
+```python
+mod = Blueprint('lab', __name__, url_prefix='/lab')
+
+@mod.route('config_index', methods=['GET'], is_menu=True, menu_name=u'实验功能配置')
+@requires_login
+def config_index():
+    return render_template('lab/config.html')
+```
+> 定义路由时， 传入 **is_menu**参数， 声明是一个菜单路由,  menu_name设置菜单名称
+
+#### 控制菜单的接口权限
+例如上面的例子, lab/config.html页面 可以访问哪些接口?
+
+* 菜单接口访问的隔离是按照 **Blueprint** 级别的
+* 既 lab/config.html页面 只能访问 Blueprint('lab', __name__, url_prefix='/lab') 这个蓝图 定义的接口
+
+> 管理台一个页面对应一个蓝图 ,  这样开发才能保证接口的权限
+
 
 
 ## SQS
